@@ -1,14 +1,20 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import React, { useState } from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import App from './App';
 
 export default function (props) {
 
     let [authMode, setAuthMode] = useState("signin")
 
+    
+
+    
+
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
-  
+      
     if (authMode === "signin") {
     return (
       <div className="Auth-form-container">
