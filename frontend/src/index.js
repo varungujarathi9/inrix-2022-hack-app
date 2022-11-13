@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import Login from './Login';
 import reportWebVitals from './reportWebVitals';
+import {Routes, Route, useNavigate, Navigate, redirect} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login />
+    <App/>
   </React.StrictMode>
+  
+  
 );
 
 // If you want to start measuring performance in your app, pass a function

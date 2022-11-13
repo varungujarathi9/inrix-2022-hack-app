@@ -1,99 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react'
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import Login from './Component/login'
+import SignUp from './Component/signup'
+import Location from './Location.js'
 
-  const App = () => {
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
 
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    } else {
-      setStatus('Locating...');
-      navigator.geolocation.getCurrentPosition((position) => {
-        setStatus(null);
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      });
-    }
-  }
-
+function App() {
   return (
-    <div className="App">
-      <button onClick={getLocation}>Get Location</button>
-      <h1>Coordinates</h1>
-      <p>{status}</p>
-      {lat && <p>Latitude: {lat}</p>}
-      {lng && <p>Longitude: {lng}</p>}
-    </div>
-  );
-}
-
-export default App;
-
-
-/*import logo from './logo.svg';
-import React, { Component } from "react";
-import './App.css';
-import { geolocated } from "react-geolocated";
-
-class App extends Component {
-  render() {
- 
-    // Check geolocation supported in
-    // browser or not
-    return this.props.isGeolocationAvailable ? (
- 
-      // Check location is enable in
-      // browser or not
-      this.props.isGeolocationEnabled ? (
- 
-        // Check coordinates of current
-        // location is available or not
-        this.props.coords ? (
-          <div>
-            <h1 style={{ color: "green" }}>GeeksForGeeks</h1>
-            <h3 style={{ color: "red" }}>
-              Current latitude and longitude of the user is
-            </h3>
-            <ul>
-              <li>latitude - {this.props.coords.latitude}</li>
-              <li>longitude - {this.props.coords.longitude}</li>
-            </ul>
+    <Router>
+      <div className="App">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+          <div className="container">
+            <Link className="navbar-brand" to={'/sign-in'}>
+              Hackathon
+            </Link>
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to={'/sign-in'}>
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={'/sign-up'}>
+                    Sign up
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={'/location'}>
+                    Location
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-        ) : (
-          <h1>Getting the location data</h1>
-        )
-      ) : (
-        <h1>Please enable location on your browser</h1>
-      )
-    ) : (
-      <h1>Please, update your or change the browser </h1>
-    );
-  }
+        </nav>
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Routes>
+              <Route exact path="/" element={<Login />} />
+              <Route path="/sign-in" element={<Login />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/location" element={<Location />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </Router>
+  )
 }
-
-/*function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}*/
-
-//export default geolocated(App);
+export default App;

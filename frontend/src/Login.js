@@ -1,15 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import React, { useState } from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, redirect} from 'react-router-dom';
 import App from './App';
 
-export default function (props) {
+const Login = (props) => {
 
     let [authMode, setAuthMode] = useState("signin")
 
-    
+     const navigate = useNavigate();
+     const clicksubmit = () => {
 
-    
+       navigate('/Location');
+     }
 
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
@@ -38,7 +40,7 @@ export default function (props) {
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" onClick = {clicksubmit}>
                 Submit
               </button>
             </div>
@@ -87,7 +89,7 @@ export default function (props) {
                 />
               </div>
               <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" onClick = {clicksubmit}>
                   Submit
                 </button>
               </div>
@@ -100,4 +102,5 @@ export default function (props) {
       )
   }
 
-  
+
+  export default Login;
