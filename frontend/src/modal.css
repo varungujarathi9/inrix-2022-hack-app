@@ -1,5 +1,4 @@
-.modal1 {
-  display: block;
+.alert-modal {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -11,8 +10,16 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+.shown{
+  display: block;
+}
+
+.hidden{
+  display: none;
+}
+
 /* Modal Content/Box */
-.modal-content1 {
+.alert-modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -21,15 +28,17 @@
 }
 
 /* The Close Button */
-.close1 {
+.alert-close {
   color: #aaa;
+  padding: 10px;
+  margin: 5px;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.close1:hover,
-.close1:focus {
+.alert-close:hover,
+.alert-close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;

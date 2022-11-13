@@ -1,12 +1,15 @@
 import './modal.css';
 
-const Modal = ({ handleClose, show, children }) => {
-  const showHideClassName = show==="true" ? "modal shown" : "modal hidden";
+const Modal = ({ handleCloseYes, handleCloseNo, show, children }) => {
+  const showHideClassName = show ? "alert-modal shown" : "alert-modal hidden";
   console.log(showHideClassName)
   return (
-    <div>
-      
-    </div>
+    <div className={showHideClassName}>
+        <div className="alert-modal-content">
+          {children}
+          <button class="toggle-button" onClick={handleCloseYes}>YES</button>    <button class="toggle-button" onClick={handleCloseNo}>NO</button>
+        </div>
+      </div>
     );
 };
 

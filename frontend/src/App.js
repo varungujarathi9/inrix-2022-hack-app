@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 import { findIncident } from './axios';
-import './modal.css';
 
 const App = () => {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
-  const [showModal, setShowModal] = useState("false")
+  const [showModal, setShowModal] = useState(false)
   const [poll, setPoll] = useState(false)
 
   const showModalFn = () => {
-    setShowModal("true")
+    setShowModal(true)
   }
 
-  const hideModalFn = () => {
-    setShowModal("false")
+  const hideModalFnYes = () => {
+    setShowModal(false)
+  }
+
+  const hideModalFnNo = () => {
+    setShowModal(false)
   }
 
   const getLocation = () => {
@@ -30,7 +33,7 @@ const App = () => {
         findIncident(position.coords.latitude, position.coords.longitude)
         .then((res)=>{
           if(res){
-            //showModalFn()
+            showModalFn()
           }
           else{
             setPoll(!poll)
@@ -61,21 +64,9 @@ const App = () => {
       {lat && <p><b>Latitude:</b> {lat}</p>}
       {lng && <p><b>Longitude:</b> {lng}</p>}
 
-      <button type="button" onClick={showModalFn}>
-        Open
-      </button>
-
-      {showModal && <p><b>showModal:</b> {showModal}</p>}
-      <Modal show={showModal} handleClose={hideModalFn}>
+      <Modal show={showModal} handleCloseYes={hideModalFnYes} handleCloseNo={hideModalFnNo}>
         <h2>Are you safe?</h2>
       </Modal>
-
-      <div className="modal1">
-        <div className="modal-content1">
-          <span className="close1">&times;</span>
-          <p>Some text in the Modal..</p>
-        </div>
-      </div>
 
     </div>
     );
