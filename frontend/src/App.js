@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import Modal from './Modal';
 
-  const App = () => {
+const App = () => {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
-
+  const [showModal, setShowModal] = useState(false)
+  
+  const showModalFn = (e) => setShowModal(!showModal)
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus('Geolocation is not supported by your browser');
@@ -27,6 +30,14 @@ import React, { useState } from 'react';
       <p>{status}</p>
       {lat && <p>Latitude: {lat}</p>}
       {lng && <p>Longitude: {lng}</p>}
+      <button onClick={e => {
+            showModalFn(e);
+          }}>show Modal{" "}</button>
+
+        <Modal show={showModal}>
+          <p>shortDescription happened near you.</p>
+          <p>Are you Safe?</p>
+        </Modal>
     </div>
   );
 }
