@@ -1,12 +1,39 @@
-import React from 'react'
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Login from './Component/login'
 import SignUp from './Component/signup'
 import Location from './Location.js'
+import React, { useState } from 'react';
+import Modal from './Modal';
+import { findIncident } from './axios';
 
+const App = () => {
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [showModal, setShowModal] = useState(false)
+  
+  const showModalFn = (e) => setShowModal(!showModal)
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        setStatus(null);
+        await setLat(position.coords.latitude);
+        await setLng(position.coords.longitude);
+        findIncident(position.coords.latitude, position.coords.longitude)
+        .then((res)=>{
+          if(res)
+            console.log("Show popup")
+        })
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      });
+    }
+  }
 
 function App() {
   return (
