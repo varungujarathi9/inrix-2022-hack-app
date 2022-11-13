@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 export default class SignUp extends Component {
   render() {
     return (
@@ -33,9 +34,11 @@ export default class SignUp extends Component {
           />
         </div>
         <div className="d-grid">
+        <Link className="nav-link" to={'/map'} >
           <button type="submit" className="btn btn-primary">
             Sign Up
           </button>
+          </Link>
         </div>
         <p className="forgot-password text-right">
           Already registered <a href="/sign-in">sign in?</a>

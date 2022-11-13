@@ -40,7 +40,7 @@ export default class login extends Component {
           </button> */}
           <Link className="nav-link" to={'/map'} >
             <button type="submit" className="btn btn-primary">
-            Submit
+              Login
             </button>
           </Link>
         </div>
