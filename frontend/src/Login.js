@@ -23,11 +23,11 @@ const Login = (props) => {
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="form-group mt-3">
-              <label>Email address</label>
+              <label>Mobile Number</label>
               <input
-                type="email"
+                type="text"
                 className="form-control mt-1"
-                placeholder="Enter email"
+                placeholder="Enter number"
               />
             </div>
             <div className="form-group mt-3">
@@ -65,17 +65,17 @@ const Login = (props) => {
               <div className="form-group mt-3">
                 <label>Full Name</label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control mt-1"
                   placeholder="e.g Jane Doe"
                 />
               </div>
               <div className="form-group mt-3">
-                <label>Email address</label>
+                <label>Mobile Number</label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control mt-1"
-                  placeholder="Email Address"
+                  placeholder="Enter number"
                 />
               </div>
               <div className="form-group mt-3">

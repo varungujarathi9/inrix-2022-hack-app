@@ -2,12 +2,87 @@ import { marker } from "leaflet";
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "./Map.css";
+import * as L from "leaflet";
+import Modal from './Modal';
+import incidents  from './fetchIncidents';
+import axios from 'axios'
 
 function Map() {
   let incidentArray = [];
   const [incidentArray1, setIncidentArray1] = useState([]);
   const userLatitude = 37.757386;
   const userLongitude = -122.490667;
+
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [showModal, setShowModal] = useState(false)
+  const [poll, setPoll] = useState(false)
+  const alertTimeout = null;
+
+  const showModalFn = () => {
+    //alertTimeout = setTimeout(sendSms, 120000)
+    setShowModal(true)
+  }
+
+  const hideModalFnYes = () => {
+    setShowModal(false)
+  }
+
+  const hideModalFnNo = () => {
+    axios.get("http://localhost:8000/")
+
+    setShowModal(false)
+  }
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    }
+    else {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        setStatus(null);
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+        incidents(position.coords.latitude, position.coords.longitude)
+        .then((res)=>{
+          if(res){
+            showModalFn()
+          }
+          else{
+            setPoll(!poll)
+          }
+        })
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      });
+    }
+  };
+
+  //on load
+  useEffect(()=>{
+    getLocation()
+  },[])
+
+
+
+  const greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+  const redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
   useEffect(() => {
     return () => {};
@@ -61,6 +136,9 @@ function Map() {
 
   return (
     <div className="Map">
+      <Modal show={showModal} handleCloseYes={hideModalFnYes} handleCloseNo={hideModalFnNo}>
+        <h4>An accident alert has already been sent to emergency services. Are you safe?</h4>
+      </Modal>
       <MapContainer
         center={[37.765297, -122.442527]}
         zoom={20}
@@ -76,9 +154,11 @@ function Map() {
         <Marker position={[40, -130]}>
           <Popup></Popup>
         </Marker> */}
-
+        <Marker icon={greenIcon} position={[37.765297, -122.442527]}>
+          <Popup>Current Location</Popup>
+        </Marker>
         {incidentArray1?.map((item) => (
-          <Marker position={[item.lat, item.lon]}>
+          <Marker icon={redIcon} position={[item.lat, item.lon]}>
             <Popup>{item.desc}</Popup>
           </Marker>
         ))}

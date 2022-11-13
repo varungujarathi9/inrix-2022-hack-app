@@ -14,11 +14,11 @@ function App() {
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
           <div className="container">
             <Link className="navbar-brand" to={'/sign-in'}>
-              Hackathon
+              INRIX Hackathon 2022
             </Link>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" to={'/sign-in'}>
                     Login
                   </Link>
@@ -29,15 +29,10 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to={'/location'}>
-                    Location
-                  </Link>
-                </li>
-                <li className="nav-item">
                   <Link className="nav-link" to={'/map'}>
                     Map
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

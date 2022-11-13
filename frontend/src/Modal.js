@@ -20,7 +20,7 @@ const Modal = ({ handleCloseYes, handleCloseNo, show, children }) => {
           <button class="toggle-button" onClick={handleCloseYes}>YES</button>    <button class="toggle-button" onClick={handleCloseNo}>NO</button>
           <br/>
           <br/>
-          <p>You have {secs}s to respond</p>
+          <p>An alert will be sent to your emergency contact in {secs} seconds</p>
         </div>
       </div>
     );

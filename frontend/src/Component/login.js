@@ -7,11 +7,11 @@ export default class login extends Component {
       <form>
         <h3>Sign In</h3>
         <div className="mb-3">
-          <label>Email address</label>
+          <label>Mobile Number</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            placeholder="Enter email"
+            placeholder="Enter number"
           />
         </div>
         <div className="mb-3">
@@ -38,7 +38,7 @@ export default class login extends Component {
           {/* <button type="submit" className="btn btn-primary">
             Submit
           </button> */}
-          <Link className="nav-link" to={'/location'} >
+          <Link className="nav-link" to={'/map'} >
             <button type="submit" className="btn btn-primary">
             Submit
             </button>

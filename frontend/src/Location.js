@@ -70,7 +70,7 @@ const Location = () => {
       {lng && <p><b>Longitude:</b> {lng}</p>}
 
       <Modal show={showModal} handleCloseYes={hideModalFnYes} handleCloseNo={hideModalFnNo}>
-        <h4>An alert has been already sent to emergency services. Are you safe?</h4>
+        <h4>An accident alert has already been sent to emergency services. Are you safe?</h4>
       </Modal>
 
     </div>
