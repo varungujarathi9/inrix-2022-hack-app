@@ -1,11 +1,8 @@
-var axios = require("axios");
+import axios from 'axios'
 
 const incidentThreshold = 10;
 
-const incidents = async () => {
-  const userLatitude = 37.757386;
-  const userLongitude = -122.490667;
-
+const incidents = async (userLatitude, userLongitude) => {
   const queryString =
     userLatitude +
     "%7C" +
@@ -24,7 +21,7 @@ const incidents = async () => {
   try {
     const response = await axios(config);
     const result = response.data.result;
-
+    console.log(result.incidents)
     for (const incident of result.incidents) {
       const id = incident.id;
       const severity = incident.severity;
@@ -44,12 +41,15 @@ const incidents = async () => {
       );
 
       if (distance <= incidentThreshold) {
-        //send to frontend;
-        break;
+        return true
+      }
+      else{
+        return false
       }
     }
   } catch (err) {
-    // console.log(err);
+    console.error(err);
+    return true
   }
 };
 
@@ -84,5 +84,4 @@ const routing = async (userLatitude, userLongitude, latitude, longitude) => {
   }
 };
 
-//const
-incidents();
+export default incidents;

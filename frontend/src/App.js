@@ -1,66 +1,11 @@
+import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Login from './Component/login'
 import SignUp from './Component/signup'
 import Location from './Location.js'
-import React, { useState, useEffect } from 'react';
-import Modal from './Modal';
-import { findIncident } from './axios';
 
-const App = () => {
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [showModal, setShowModal] = useState(false)
-  const [poll, setPoll] = useState(false)
-
-  const showModalFn = () => {
-    setShowModal(true)
-  }
-
-  const hideModalFnYes = () => {
-    setShowModal(false)
-  }
-
-  const hideModalFnNo = () => {
-    setShowModal(false)
-  }
-
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    }
-    else {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        setStatus(null);
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-        findIncident(position.coords.latitude, position.coords.longitude)
-        .then((res)=>{
-          if(res){
-            showModalFn()
-          }
-          else{
-            setPoll(!poll)
-          }
-        })
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      });
-    }
-  };
-
-  //on load
-  useEffect(()=>{
-    getLocation()
-  },[])
-
-  // // every 30s
-  // useEffect(() => {
-  //   const id = setInterval(getLocation, 30000)
-  //   return () => clearInterval(id)
-  // },[poll]);
 
 function App() {
   return (
