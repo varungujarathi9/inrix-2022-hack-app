@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Modal from './Modal';
 import { findIncident } from './axios';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
@@ -15,6 +16,9 @@ const App = () => {
     }
   }, [ref, map]);
 
+  const [showModal, setShowModal] = useState(false)
+  
+  const showModalFn = (e) => setShowModal(!showModal)
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus('Geolocation is not supported by your browser');
@@ -48,6 +52,14 @@ const App = () => {
       <Wrapper apiKey={"AIzaSyAW2iAEIXgn7LOJAmD95suqL4SrmTQTdn8"} render={render}>
       <div ref={ref} />
       </Wrapper>
+      <button onClick={e => {
+            showModalFn(e);
+          }}>show Modal{" "}</button>
+
+        <Modal show={showModal}>
+          <p>shortDescription happened near you.</p>
+          <p>Are you Safe?</p>
+        </Modal>
     </div>
   );
 }
