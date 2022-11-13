@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import { findIncident } from './axios';
 
 const App = () => {
   const [lat, setLat] = useState(null);
@@ -13,10 +14,15 @@ const App = () => {
       setStatus('Geolocation is not supported by your browser');
     } else {
       setStatus('Locating...');
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(async (position) => {
         setStatus(null);
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
+        await setLat(position.coords.latitude);
+        await setLng(position.coords.longitude);
+        findIncident(position.coords.latitude, position.coords.longitude)
+        .then((res)=>{
+          if(res)
+            console.log("Show popup")
+        })
       }, () => {
         setStatus('Unable to retrieve your location');
       });
