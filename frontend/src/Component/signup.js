@@ -6,7 +6,7 @@ export default class SignUp extends Component {
       <form>
         <h3>Sign Up</h3>
         <div className="mb-3">
-          <label>Full name</label>
+          <label>Full Name</label>
           <input
             type="text"
             className="form-control"

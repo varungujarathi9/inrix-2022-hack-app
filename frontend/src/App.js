@@ -6,6 +6,7 @@ import Login from './Component/login'
 import SignUp from './Component/signup'
 import Location from './Location.js'
 import Map from './Map.js'
+import { Modal } from 'bootstrap';
 
 function App() {
   return (
@@ -24,15 +25,11 @@ function App() {
                   </Link>
                 </li>*/
                 <li className="nav-item">
-                  <Link className="nav-link" to={'/sign-up'}>
-                    Sign Up
-                  </Link>
-                </li>
-                /*<li className="nav-item">
-                  <Link className="nav-link" to={'/map'}>
-                    Map
-                  </Link>
-                </li> */}
+                    <Link className="nav-link" to={'/sign-up'}>
+                      Sign Up
+                    </Link>
+                  </li> 
+                }
               </ul>
             </div>
           </div>
@@ -45,6 +42,7 @@ function App() {
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/location" element={<Location />} />
               <Route path="/map" element={<Map />} />
+              <Route path="/sos" element={<Modal />} />
             </Routes>
           </div>
         </div>

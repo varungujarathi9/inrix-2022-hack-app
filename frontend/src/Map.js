@@ -113,6 +113,7 @@ function Map() {
 
     const result = text.result;
     console.log(result);
+    
     try {
       for (const incident of result.incidents) {
         const latitude = incident.geometry.coordinates[1];
@@ -139,6 +140,25 @@ function Map() {
 
   return (
     <div className="Map">
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      <div className="container">
+      
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav ml-auto">
+                {/* <li className="nav-item">
+                  <Link className="nav-link" to={'/sign-in'}>
+                    Login
+                  </Link>
+                </li>*/
+                <><li className="nav-item">
+                      <button class="button-no"> SOS </button>
+                    </li>
+                    </> 
+                }
+              </ul>
+            </div>
+            </div>
+      </nav>
       <Modal show={showModal} handleCloseYes={hideModalFnYes} handleCloseNo={hideModalFnNo}>
         <h4>An incident alert has already been sent to 911. Are you safe?</h4>
       </Modal>
